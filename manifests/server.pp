@@ -1,16 +1,18 @@
 class iodine::server(
-  $domain = hiera('iodine_domain'),
-  $server_ip = hiera('iodine_server_ip'),
-  $password = trocla("iodine_${::fqdn}",'plain')
+  $domain,
+  $server_ip,
+  $password,
+  $manage_shorewall = false,
+  $shorewall_masq   = true
 ) {
   case $::operatingsystem {
     'debian','ubuntu': { include iodine::server::debian }
     default: { include iodine::server::base }
   }
 
-  if hiera('use_shorewall',false) {
+  if $manage_shorewall {
     include shorewall::rules::dns
-    if hiera('iodine_shorewall_masq',true) {
+    if $shorewall_masq {
       include iodine::server::shorewall_masq
     }
   }
