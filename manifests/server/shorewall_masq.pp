@@ -1,6 +1,6 @@
 class iodine::server::shorewall_masq(
-  $zone = hiera('iodine_shorewall_zone','net'),
-  $interface = hiera('iodine_shorewall_interface','eth0')
+  $zone = 'net',
+  $interface = 'eth0'
 ) {
   shorewall::interface { 'dns0':
     zone    =>  $zone,
