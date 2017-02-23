@@ -1,0 +1,6 @@
+# You may provide password in two way, uncomment next line, or provide it in OPTIONS
+IODINED_PASS="<%= scope.lookupvar('iodine::server::password') %>"
+
+# See `man iodine`
+#OPTIONS="-P PASSWORD TUNNEL_IP DOMAIN"
+OPTIONS="-l <%= scope.lookupvar("iodine::server::listen_ip") %> -c <%= scope.lookupvar("iodine::server::server_ip") %> <%= scope.lookupvar("iodine::server::domain") %>"
