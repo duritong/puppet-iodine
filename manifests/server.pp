@@ -9,9 +9,9 @@ class iodine::server(
   $shorewall_zone      = 'net',
   $shorewall_interface = 'eth0',
 ) {
-  case $::osfamily {
-    /(Debian|Ubuntu)/: { include iodine::server::debian }
-    /RedHat/: { include iodine::server::redhat }
+  case $osfamily {
+    'Debian','Ubuntu': { include iodine::server::debian }
+    'RedHat': { include iodine::server::redhat }
     default: { include iodine::server::base }
   }
 
