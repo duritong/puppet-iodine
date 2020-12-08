@@ -1,6 +1,6 @@
 class iodine::server::shorewall_masq(
   $zone = 'net',
-  $interface = 'eth0'
+  $interface = $facts['networking']['primary']
 ) {
   shorewall::interface { 'dns0':
     zone    =>  $zone,
@@ -11,7 +11,7 @@ class iodine::server::shorewall_masq(
   $nibbles = split($iodine::server::server_ip, '[.]')
   shorewall::masq{'dnsvpn':
     interface => $interface,
-    source => "${nibbles[0]}.${nibbles[1]}.${nibbles[2]}.0/24"
+    source    => "${nibbles[0]}.${nibbles[1]}.${nibbles[2]}.0/24"
   }
 
 }
